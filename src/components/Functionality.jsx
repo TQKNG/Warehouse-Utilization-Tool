@@ -7,7 +7,7 @@ import {
   isPartView,
 } from "@/store";
 
-export default function Functionality() {
+export default function Functionality(props) {
   const [binView, setShowBinView] = useAtom(isBinView);
   const [showEmpty, setShowEmpty] = useAtom(isShowEmpty);
   const [showDangerousGood, setShowDangerousGood] =
@@ -38,6 +38,18 @@ export default function Functionality() {
       feature:
         "This feature allows user to visualize which bin can store dangerous goods.",
     },
+    {
+      title: "Drag and Drop",
+      img:"https://cdn-icons-png.flaticon.com/512/498/498924.png?w=826&t=st=1677938951~exp=1677939551~hmac=3a7b3072afb09ef6bfdd0e630ef0d5b9a53d71c67954df752546c0ea3f21348c",
+      feature:
+        "This feature allows user to move part from one bin to another",
+    },
+    {
+      title: "Tooltip",
+      img: "https://img.freepik.com/free-vector/speech-bubble-vector-halftone-style_53876-126726.jpg?w=826&t=st=1677939136~exp=1677939736~hmac=828064fabbfc7ca032e21a70d65222707aca8c1ed0f9b92574305c2449f0909c",
+      feature:
+        "This feature allows user to click on any bin to view more information.",
+    },
   ];
 
   const handleClick = (item) => {
@@ -47,30 +59,35 @@ export default function Functionality() {
         setShowEmpty(false);
         setShowDangerousGood(false);
         setShowPartView(false);
+        props.focusToOutput.current.scrollIntoView({behavior:"smooth"});
         break;
       case "Empty":
         setShowBinView(false);
         setShowEmpty(true);
         setShowDangerousGood(false);
         setShowPartView(false);
+        props.focusToOutput.current.scrollIntoView({behavior:"smooth"});
         break;
       case "Dangerous Goods":
         setShowBinView(false);
         setShowEmpty(false);
         setShowDangerousGood(true);
         setShowPartView(false);
+        props.focusToOutput.current.scrollIntoView({behavior:"smooth"});
         break;
       case "Part View":
         setShowBinView(true);
         setShowEmpty(false);
         setShowDangerousGood(false);
         setShowPartView(true);
+        props.focusToOutput.current.scrollIntoView({behavior:"smooth"});
         break;
       default:
         setShowBinView(false);
         setShowEmpty(false);
         setShowDangerousGood(false);
         setShowPartView(false);
+        props.focusToOutput.current.scrollIntoView({behavior:"smooth"});
     }
   };
 
@@ -82,7 +99,7 @@ export default function Functionality() {
           isPressable
           isHoverable
           onClick={() => handleClick(item)}
-          css={{ marginBottom: "$10", marginLeft: "$10", width: "300px" }}
+          css={{ marginBottom: "$10", marginLeft: "$10", width: "200px" }}
         >
           <Card.Header>
             <Row>

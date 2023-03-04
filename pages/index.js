@@ -5,7 +5,7 @@ import Functionality from "@/src/components/Functionality";
 import Title from "@/src/components/Title";
 import Legend from "@/src/components/Legend";
 import { Row, Tooltip, Text, Container, Col } from "@nextui-org/react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAtom } from "jotai";
 import { toast } from "react-toastify";
 import {
@@ -26,6 +26,7 @@ const Home = () => {
   const [showDangerousGood, setShowDangerousGood] =
     useAtom(isShowDangerousGood);
   const [showPartView, setShowPartView] = useAtom(isPartView);
+  const focusToOutput = useRef(null);
 
   const colorCell = (category, status) => {
     if (showDangerousGood) {
@@ -89,14 +90,16 @@ const Home = () => {
         </Row>
         <Text h2>Feature</Text>
         <Row css={{ marginBottom: "$10" }}>
-          <Functionality />
+          <Col lg={12} md={12} sm={12}>
+            <Functionality focusToOutput={focusToOutput} />
+          </Col>
         </Row>
         <Row>
-          <Text h2>Output</Text>
+          <Text ref={focusToOutput} h2>Output</Text>
         </Row>
         <Row>
           <Col>
-            <Legend/>
+            <Legend />
           </Col>
           {chunkedData.map((chunk, rowIndex) => (
             <Container key={rowIndex}>
